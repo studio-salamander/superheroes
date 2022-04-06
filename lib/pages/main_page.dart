@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superheroes/blocs/main_bloc.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
+import 'package:superheroes/resources/superheroes_images.dart';
+import 'package:superheroes/widgets/action_button.dart';
+
+import '../widgets/favorites.dart';
+import '../widgets/info_with_button.dart';
+import '../widgets/loading_indicator.dart';
+import '../widgets/min_symbols.dart';
+import '../widgets/search_result.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -63,17 +71,11 @@ class MainPageContent extends StatelessWidget {
         const MainPageStateWidget(),
         Align(
           alignment: Alignment.bottomCenter,
-          child: GestureDetector(
+          child: ActionButton(
             onTap: () => bloc.nextState(),
-            child: Text(
-              "Next State".toUpperCase(),
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ),
+            text: "Next State",
           ),
-        )
+        ),
       ],
     );
   }
@@ -93,14 +95,44 @@ class MainPageStateWidget extends StatelessWidget {
         }
         final MainPageState state = snapshot.data!;
         switch (state) {
+          case MainPageState.noFavorites:
+            return const InfoWithButton(
+              title: "No favorites yet",
+              subtitle: "Search and add",
+              buttonText: "Search",
+              assetImage: SuperheroesImages.ironman,
+              imageHeight: 119,
+              imageWidth: 108,
+              imageTopPadding: 9,
+            );
+          case MainPageState.minSymbols:
+            return const MinSymbols();
           case MainPageState.loading:
             return const LoadingIndicator();
-          case MainPageState.noFavorites:
-          case MainPageState.minSymbols:
-          case MainPageState.nothingFound:
-          case MainPageState.loadingError:
-          case MainPageState.searchResults:
           case MainPageState.favorites:
+            return const Favorites();
+          case MainPageState.nothingFound:
+            return const InfoWithButton(
+              title: "Nothing found",
+              subtitle: "Search for something else",
+              buttonText: "Search",
+              assetImage: SuperheroesImages.hulk,
+              imageHeight: 112,
+              imageWidth: 112,
+              imageTopPadding: 16,
+            );
+          case MainPageState.loadingError:
+            return const InfoWithButton(
+              title: "Error happened",
+              subtitle: "Error happened",
+              buttonText: "Retry",
+              assetImage: SuperheroesImages.superman,
+              imageHeight: 106,
+              imageWidth: 126,
+              imageTopPadding: 22,
+            );
+          case MainPageState.searchResults:
+            return const SearchResult();
           default:
             return Center(
               child: Text(
@@ -110,26 +142,6 @@ class MainPageStateWidget extends StatelessWidget {
             );
         }
       },
-    );
-  }
-}
-
-class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Align(
-      alignment: Alignment.topCenter,
-      child: Padding(
-        padding: EdgeInsets.only(top: 110),
-        child: CircularProgressIndicator(
-          color: SuperheroesColors.blue,
-          strokeWidth: 4,
-        ),
-      ),
     );
   }
 }
