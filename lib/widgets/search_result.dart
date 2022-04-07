@@ -4,8 +4,8 @@ import 'package:superheroes/widgets/superhero_card.dart';
 import '../pages/superhero_page.dart';
 import '../resources/superheroes_colors.dart';
 
-class SearchResult extends StatelessWidget {
-  const SearchResult({Key? key}) : super(key: key);
+class SearchResultWidget extends StatelessWidget {
+  const SearchResultWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class SearchResult extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 24,
-              color: SuperheroesColors.white,
+              color: Colors.white,
             ),
           ),
         ),

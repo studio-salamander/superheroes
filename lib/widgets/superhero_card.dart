@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../resources/superheroes_colors.dart';
 
 class SuperheroCard extends StatelessWidget {
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
   final String name;
   final String realName;
   final String imageUrl;
@@ -21,7 +21,7 @@ class SuperheroCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: SuperheroesColors.darkGray,
+        color: SuperheroesColors.indigo,
         height: 70,
         child: Row(
           children: [
@@ -42,7 +42,7 @@ class SuperheroCard extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
-                      color: SuperheroesColors.white,
+                      color: Colors.white,
                     ),
                   ),
                   Text(
@@ -50,7 +50,7 @@ class SuperheroCard extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
-                      color: SuperheroesColors.white,
+                      color: Colors.white,
                     ),
                   ),
                 ],

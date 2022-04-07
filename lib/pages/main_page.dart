@@ -95,43 +95,19 @@ class MainPageStateWidget extends StatelessWidget {
         final MainPageState state = snapshot.data!;
         switch (state) {
           case MainPageState.noFavorites:
-            return const InfoWithButton(
-              title: "No favorites yet",
-              subtitle: "Search and add",
-              buttonText: "Search",
-              assetImage: SuperheroesImages.ironman,
-              imageHeight: 119,
-              imageWidth: 108,
-              imageTopPadding: 9,
-            );
+            return const NoFavoritesWidget();
           case MainPageState.minSymbols:
-            return const MinSymbols();
+            return const MinSymbolsWidget();
           case MainPageState.loading:
             return const LoadingIndicator();
           case MainPageState.favorites:
-            return const Favorites();
-          case MainPageState.nothingFound:
-            return const InfoWithButton(
-              title: "Nothing found",
-              subtitle: "Search for something else",
-              buttonText: "Search",
-              assetImage: SuperheroesImages.hulk,
-              imageHeight: 112,
-              imageWidth: 112,
-              imageTopPadding: 16,
-            );
-          case MainPageState.loadingError:
-            return const InfoWithButton(
-              title: "Error happened",
-              subtitle: "Error happened",
-              buttonText: "Retry",
-              assetImage: SuperheroesImages.superman,
-              imageHeight: 106,
-              imageWidth: 126,
-              imageTopPadding: 22,
-            );
+            return const FavoritesWidget();
           case MainPageState.searchResults:
-            return const SearchResult();
+            return const SearchResultWidget();
+          case MainPageState.nothingFound:
+            return const NothingFoundWidget();
+          case MainPageState.loadingError:
+            return const LoadingErrorWidget();
           default:
             return Center(
               child: Text(
@@ -165,8 +141,8 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
-class MinSymbols extends StatelessWidget {
-  const MinSymbols({
+class MinSymbolsWidget extends StatelessWidget {
+  const MinSymbolsWidget({
     Key? key,
   }) : super(key: key);
 
@@ -181,7 +157,7 @@ class MinSymbols extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 20,
-            color: SuperheroesColors.white,
+            color: Colors.white,
           ),
         ),
       ),
@@ -189,8 +165,8 @@ class MinSymbols extends StatelessWidget {
   }
 }
 
-class Favorites extends StatelessWidget {
-  const Favorites({Key? key}) : super(key: key);
+class FavoritesWidget extends StatelessWidget {
+  const FavoritesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +181,7 @@ class Favorites extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 24,
-              color: SuperheroesColors.white,
+              color: Colors.white,
             ),
           ),
         ),
@@ -244,6 +220,63 @@ class Favorites extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class NoFavoritesWidget extends StatelessWidget {
+  const NoFavoritesWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: InfoWithButton(
+        title: "No favorites yet",
+        subtitle: "Search and add",
+        buttonText: "Search",
+        assetImage: SuperheroesImages.ironman,
+        imageHeight: 119,
+        imageWidth: 108,
+        imageTopPadding: 9,
+      ),
+    );
+  }
+}
+
+class NothingFoundWidget extends StatelessWidget {
+  const NothingFoundWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: InfoWithButton(
+        title: "Nothing found",
+        subtitle: "Search for something else",
+        buttonText: "Search",
+        assetImage: SuperheroesImages.hulk,
+        imageHeight: 112,
+        imageWidth: 84,
+        imageTopPadding: 16,
+      ),
+    );
+  }
+}
+
+class LoadingErrorWidget extends StatelessWidget {
+  const LoadingErrorWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: InfoWithButton(
+        title: "Error happened",
+        subtitle: "Please, try again",
+        buttonText: "Retry",
+        assetImage: SuperheroesImages.superman,
+        imageHeight: 106,
+        imageWidth: 126,
+        imageTopPadding: 22,
+      ),
     );
   }
 }

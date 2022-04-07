@@ -3,11 +3,13 @@ import 'package:superheroes/resources/superheroes_colors.dart';
 
 class ActionButton extends StatelessWidget {
   final String text;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
-  const ActionButton(
-      {Key? key, required this.text, required this.onTap})
-      : super(key: key);
+  const ActionButton({
+    Key? key,
+    required this.text,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,12 @@ class ActionButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         margin: const EdgeInsets.only(bottom: 30),
-        height: 36,
         child: Text(
           text.toUpperCase(),
           style: const TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 14,
-            color: SuperheroesColors.white,
+            color: Colors.white,
           ),
         ),
       ),
