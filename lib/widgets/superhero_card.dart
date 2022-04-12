@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../blocs/main_bloc.dart';
 import '../resources/superheroes_colors.dart';
 
 class SuperheroCard extends StatelessWidget {
   final VoidCallback onTap;
-  final String name;
-  final String realName;
-  final String imageUrl;
+  final SuperheroInfo superheroInfo;
 
   const SuperheroCard({
     Key? key,
     required this.onTap,
-    required this.name,
-    required this.realName,
-    required this.imageUrl,
+    required this.superheroInfo,
   }) : super(key: key);
 
   @override
@@ -21,12 +18,16 @@ class SuperheroCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: SuperheroesColors.indigo,
         height: 70,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: SuperheroesColors.indigo,
+        ),
         child: Row(
           children: [
             Image.network(
-              imageUrl,
+              superheroInfo.imageUrl,
               width: 70,
               height: 70,
               fit: BoxFit.cover,
@@ -38,7 +39,7 @@ class SuperheroCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name.toUpperCase(),
+                    superheroInfo.name.toUpperCase(),
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
@@ -46,7 +47,7 @@ class SuperheroCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    realName,
+                    superheroInfo.realName,
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
