@@ -92,7 +92,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance?.addPersistentFrameCallback((timeStamp) {
+    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
       final MainBloc bloc = Provider.of<MainBloc>(context, listen: false);
       controller.addListener(() {
         bloc.updateText(controller.text);
