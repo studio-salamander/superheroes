@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../blocs/main_bloc.dart';
 import '../resources/superheroes_colors.dart';
-import '../resources/superheroes_images.dart';
 import 'action_button.dart';
 
 class InfoWithButton extends StatelessWidget {
@@ -12,6 +13,7 @@ class InfoWithButton extends StatelessWidget {
   final double imageHeight;
   final double imageWidth;
   final double imageTopPadding;
+  final VoidCallback onTap;
 
   const InfoWithButton({
     Key? key,
@@ -22,10 +24,12 @@ class InfoWithButton extends StatelessWidget {
     required this.imageHeight,
     required this.imageWidth,
     required this.imageTopPadding,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final MainBloc bloc = Provider.of<MainBloc>(context, listen: false);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -70,7 +74,7 @@ class InfoWithButton extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         ActionButton(
-          onTap: () {},
+          onTap: onTap,
           text: buttonText,
         ),
       ],
